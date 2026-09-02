@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MAISON — Modern Lifestyle Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #1a1a18;
+      --sand:     #f5f0e8;
+      --warm:     #e8ddd0;
+      --clay:     #c4835a;
+      --mist:     #8a9090;
+      --white:    #ffffff;
+      --serif:    'Playfair Display', Georgia, serif;
+      --sans:     'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--sand);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--sand);
+      border-bottom: 1px solid var(--warm);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.5rem; font-weight: 900;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--ink);
+      font-size: 0.875rem; font-weight: 500; letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--clay); }
+    .nav-actions { display: flex; gap: 1rem; align-items: center; }
+    .nav-actions button {
+      background: none; border: none; cursor: pointer;
+      font-size: 1.2rem; color: var(--ink);
+      transition: color 0.2s;
+    }
+    .nav-actions button:hover { color: var(--clay); }
+    .cart-btn {
+      background: var(--ink) !important;
+      color: var(--white) !important;
+      padding: 0.45rem 1.2rem !important;
+      border-radius: 2px !important;
+      font-family: var(--sans) !important;
+      font-size: 0.8rem !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.06em !important;
+    }
+    .cart-btn:hover { background: var(--clay) !important; color: var(--white) !important; }
+
+    /* HERO */
+    .hero {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 64px);
+    }
+    .hero-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6vw 5vw 6vw 8vw;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--clay); margin-bottom: 1.5rem;
+    }
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 900; line-height: 1.08;
+      margin-bottom: 1.5rem;
+    }
+    .hero-headline em { font-style: italic; color: var(--clay); }
+    .hero-sub {
+      font-size: 1rem; color: var(--mist);
+      max-width: 380px; margin-bottom: 2.5rem; font-weight: 300;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--ink); color: var(--white);
+      padding: 0.85rem 2.2rem;
+      font-family: var(--sans); font-size: 0.875rem;
+      font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      border-radius: 2px; border: none; cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--clay); transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-block;
+      background: transparent; color: var(--ink);
+      padding: 0.85rem 2.2rem;
+      font-family: var(--sans); font-size: 0.875rem;
+      font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      border-radius: 2px; border: 2px solid var(--ink); cursor: pointer;
+      transition: all 0.25s; margin-left: 1rem;
+    }
+    .btn-ghost:hover { background: var(--ink); color: var(--white); }
+    .hero-image {
+      background: var(--warm);
+      position: relative; overflow: hidden;
+    }
+    .hero-image-inner {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #d4c4b0 0%, #b8a090 50%, #c4835a33 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-visual {
+      width: 60%; aspect-ratio: 3/4;
+      background: linear-gradient(160deg, #e8ddd0, #c4a882);
+      border-radius: 4px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.18);
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+      padding: 2rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4835a' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-product-tag {
+      background: var(--white); border-radius: 2px;
+      padding: 0.6rem 1rem; text-align: center;
+      position: relative; z-index: 1;
+    }
+    .hero-product-tag span { display: block; }
+    .tag-name { font-family: var(--serif); font-size: 1rem; font-weight: 700; }
+    .tag-price { font-size: 0.8rem; color: var(--clay); font-weight: 500; }
+
+    /* MARQUEE */
+    .marquee-strip {
+      background: var(--ink); color: var(--white);
+      padding: 0.75rem 0; overflow: hidden;
+    }
+    .marquee-track {
+      display: flex; gap: 3rem;
+      white-space: nowrap;
+      animation: marquee 22s linear infinite;
+    }
+    .marquee-track span {
+      font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500;
+    }
+    .marquee-track .dot { color: var(--clay); }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* SECTION HEADERS */
+    .section { padding: 6rem 8vw; }
+    .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 3rem; }
+    .section-title { font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; }
+    .section-link { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--clay); text-decoration: none; border-bottom: 1px solid var(--clay); padding-bottom: 1px; }
+    .section-link:hover { opacity: 0.7; }
+
+    /* PRODUCT GRID */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 2rem; }
+    .product-card {
+      cursor: pointer;
+      transition: transform 0.25s;
+    }
+    .product-card:hover { transform: translateY(-4px); }
+    .product-card:hover .product-img { box-shadow: 0 20px 50px rgba(0,0,0,0.14); }
+    .product-img {
+      aspect-ratio: 3/4; border-radius: 3px;
+      transition: box-shadow 0.3s;
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .product-img svg { opacity: 0.25; }
+    .product-badge {
+      position: absolute; top: 1rem; left: 1rem;
+      background: var(--clay); color: var(--white);
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 1px;
+    }
+    .product-info { padding: 1rem 0; }
+    .product-category { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); margin-bottom: 0.3rem; }
+    .product-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; }
+    .product-price { font-weight: 500; font-size: 1rem; }
+    .product-price .old { text-decoration: line-through; color: var(--mist); font-size: 0.85rem; margin-right: 0.4rem; }
+    .add-btn {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--ink); color: var(--white);
+      border: none; cursor: pointer; font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .add-btn:hover { background: var(--clay); transform: scale(1.1); }
+
+    /* CATEGORIES */
+    .categories { background: var(--white); }
+    .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .cat-card {
+      aspect-ratio: 4/3; border-radius: 3px;
+      position: relative; overflow: hidden; cursor: pointer;
+      display: flex; align-items: flex-end;
+      transition: transform 0.3s;
+    }
+    .cat-card:hover { transform: scale(1.02); }
+    .cat-card-bg { position: absolute; inset: 0; }
+    .cat-card-label {
+      position: relative; z-index: 1;
+      padding: 1.5rem;
+      background: linear-gradient(to top, rgba(26,26,24,0.7) 0%, transparent 100%);
+      width: 100%;
+    }
+    .cat-card-label p { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+    .cat-card-label h3 { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; color: var(--white); }
+
+    /* PROMO BANNER */
+    .promo {
+      background: var(--ink);
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 400px;
+    }
+    .promo-text {
+      padding: 5rem 6vw;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .promo-eyebrow { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clay); margin-bottom: 1.2rem; }
+    .promo-title { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 900; color: var(--white); line-height: 1.1; margin-bottom: 1.5rem; }
+    .promo-desc { color: var(--mist); font-weight: 300; margin-bottom: 2rem; max-width: 360px; }
+    .promo-visual {
+      background: linear-gradient(135deg, #2a2a28, #3d3530);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .promo-circle {
+      width: 260px; height: 260px; border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #c4835a44, #c4835a11);
+      border: 1px solid #c4835a33;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .promo-pct { font-family: var(--serif); font-size: 5rem; font-weight: 900; color: var(--clay); line-height: 1; }
+    .promo-off { font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-top: 0.3rem; text-align: center; }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--warm); }
+    .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .test-card {
+      background: var(--white); padding: 2rem;
+      border-radius: 3px;
+    }
+    .stars { color: var(--clay); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+    .test-text { font-style: italic; font-family: var(--serif); font-size: 1rem; color: var(--ink); margin-bottom: 1.5rem; line-height: 1.7; }
+    .test-author { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mist); }
+
+    /* NEWSLETTER */
+    .newsletter { background: var(--clay); padding: 5rem 8vw; text-align: center; }
+    .newsletter h2 { font-family: var(--serif); font-size: clamp(2rem, 3vw, 2.8rem); color: var(--white); font-weight: 900; margin-bottom: 0.75rem; }
+    .newsletter p { color: rgba(255,255,255,0.78); margin-bottom: 2rem; font-weight: 300; }
+    .newsletter-form { display: flex; gap: 0; max-width: 420px; margin: 0 auto; border-radius: 2px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+    .newsletter-form input {
+      flex: 1; padding: 0.95rem 1.2rem;
+      border: none; outline: none;
+      font-family: var(--sans); font-size: 0.9rem;
+      background: var(--white); color: var(--ink);
+    }
+    .newsletter-form button {
+      padding: 0 1.5rem;
+      background: var(--ink); color: var(--white);
+      border: none; cursor: pointer;
+      font-family: var(--sans); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .newsletter-form button:hover { background: #333; }
+
+    /* FOOTER */
+    footer {
+      background: var(--ink); color: var(--mist);
+      padding: 4rem 8vw 2rem;
+    }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-brand .nav-logo { color: var(--white); display: block; margin-bottom: 1rem; }
+    .footer-brand p { font-size: 0.875rem; font-weight: 300; line-height: 1.7; max-width: 240px; }
+    .footer-col h4 { color: var(--white); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.2rem; font-weight: 600; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.6rem; }
+    .footer-col a { color: var(--mist); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--clay); }
+    .footer-bottom { border-top: 1px solid #2e2e2c; padding-top: 1.5rem; display: flex; justify-content: space-between; font-size: 0.78rem; }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+      background: var(--ink); color: var(--white);
+      padding: 1rem 1.5rem; border-radius: 3px;
+      font-size: 0.875rem; font-weight: 500;
+      transform: translateY(100px); opacity: 0;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast span { color: var(--clay); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-image { min-height: 50vw; }
+      .hero-text { padding: 4rem 6vw; }
+      .cat-grid { grid-template-columns: 1fr 1fr; }
+      .promo { grid-template-columns: 1fr; }
+      .promo-visual { min-height: 260px; }
+      .test-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .cat-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">MAISON</a>
+  <ul class="nav-links">
+    <li><a href="#">New In</a></li>
+    <li><a href="#">Living</a></li>
+    <li><a href="#">Kitchen</a></li>
+    <li><a href="#">Apparel</a></li>
+    <li><a href="#">Sale</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button title="Search">🔍</button>
+    <button title="Wishlist">♡</button>
+    <button class="cart-btn" onclick="showToast('Cart opened')">Bag (0)</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Summer Collection 2026</p>
+    <h1 class="hero-headline">Objects made<br>for <em>living</em><br>beautifully.</h1>
+    <p class="hero-sub">Curated homewares, apparel, and everyday essentials — designed to outlast trends and enrich the daily ritual.</p>
+    <div>
+      <a href="#featured" class="btn-primary">Shop Now</a>
+      <a href="#categories" class="btn-ghost">Browse All</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="hero-image-inner">
+      <div class="hero-visual">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:30%;left:50%;transform:translate(-50%,-50%)">
+          <circle cx="60" cy="60" r="55" stroke="#c4835a" stroke-width="1.5" stroke-dasharray="8 6"/>
+          <circle cx="60" cy="60" r="35" fill="#c4835a" opacity="0.2"/>
+          <rect x="45" y="30" width="30" height="40" rx="2" fill="#c4835a" opacity="0.5"/>
+          <rect x="50" y="72" width="20" height="6" rx="1" fill="#c4835a" opacity="0.4"/>
+          <path d="M50 50 Q60 42 70 50" stroke="white" stroke-width="1.5" fill="none" opacity="0.6"/>
+        </svg>
+        <div class="hero-product-tag">
+          <span class="tag-name">Cerámique Vase</span>
+          <span class="tag-price">₹4,200</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>Free shipping over ₹2,000</span><span class="dot">✦</span>
+    <span>Sustainable materials</span><span class="dot">✦</span>
+    <span>30-day returns</span><span class="dot">✦</span>
+    <span>Handcrafted goods</span><span class="dot">✦</span>
+    <span>New arrivals weekly</span><span class="dot">✦</span>
+    <span>Free shipping over ₹2,000</span><span class="dot">✦</span>
+    <span>Sustainable materials</span><span class="dot">✦</span>
+    <span>30-day returns</span><span class="dot">✦</span>
+    <span>Handcrafted goods</span><span class="dot">✦</span>
+    <span>New arrivals weekly</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- FEATURED PRODUCTS -->
+<section class="section" id="featured">
+  <div class="section-header">
+    <h2 class="section-title">Featured Picks</h2>
+    <a href="#" class="section-link">View all</a>
+  </div>
+  <div class="product-grid" id="product-grid"></div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section categories" id="categories">
+  <div class="section-header">
+    <h2 class="section-title">Shop by Category</h2>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card" onclick="showToast('Browsing Living')">
+      <div class="cat-card-bg" style="background:linear-gradient(135deg,#d4bfa8,#a88568)"></div>
+      <div class="cat-card-label">
+        <p>Explore</p>
+        <h3>Living Room</h3>
+      </div>
+    </div>
+    <div class="cat-card" onclick="showToast('Browsing Kitchen')">
+      <div class="cat-card-bg" style="background:linear-gradient(135deg,#c4d4c0,#8aaa82)"></div>
+      <div class="cat-card-label">
+        <p>Explore</p>
+        <h3>Kitchen & Dining</h3>
+      </div>
+    </div>
+    <div class="cat-card" onclick="showToast('Browsing Apparel')">
+      <div class="cat-card-bg" style="background:linear-gradient(135deg,#c8c4d8,#9090b8)"></div>
+      <div class="cat-card-label">
+        <p>Explore</p>
+        <h3>Apparel</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO BANNER -->
+<section class="promo">
+  <div class="promo-text">
+    <p class="promo-eyebrow">Limited Time Offer</p>
+    <h2 class="promo-title">Summer<br>clearance<br>is here.</h2>
+    <p class="promo-desc">Up to 40% off selected homewares and apparel. Ends 30 June — while stocks last.</p>
+    <a href="#" class="btn-primary" onclick="showToast('Sale items loaded!')">Shop the Sale</a>
+  </div>
+  <div class="promo-visual">
+    <div class="promo-circle">
+      <div>
+        <div class="promo-pct">40%</div>
+        <div class="promo-off">Off Sale</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials">
+  <div class="section-header">
+    <h2 class="section-title">What people say</h2>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <p class="test-text">"The ceramic bowls arrived beautifully wrapped. They're even more stunning in person — the glaze is extraordinary."</p>
+      <p class="test-author">Priya M. — Mumbai</p>
+    </div>
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <p class="test-text">"Finally a shop that gets it. Quality over quantity, every single time. My linen throw has survived two years of daily use."</p>
+      <p class="test-author">Arjun R. — Bengaluru</p>
+    </div>
+    <div class="test-card">
+      <div class="stars">★★★★☆</div>
+      <p class="test-text">"Shipped fast, packaged thoughtfully, and the product exceeded my expectations. Will absolutely be ordering again."</p>
+      <p class="test-author">Ananya S. — Delhi</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <h2>Join the inner circle.</h2>
+  <p>New arrivals, exclusive offers, and behind-the-scenes stories — straight to your inbox.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="your@email.com" />
+    <button onclick="showToast('You\'re subscribed! 🎉')">Subscribe</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="nav-logo" href="#">MAISON</a>
+      <p>Objects for living beautifully. Sourced from artisans across India and beyond.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">New In</a></li>
+        <li><a href="#">Living Room</a></li>
+        <li><a href="#">Kitchen</a></li>
+        <li><a href="#">Apparel</a></li>
+        <li><a href="#">Sale</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Shipping & Returns</a></li>
+        <li><a href="#">Order Tracking</a></li>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About MAISON</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Artisan Stories</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 MAISON. All rights reserved.</span>
+    <span>Privacy · Terms · Cookies</span>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // Products data
+  const products = [
+    { name: "Wabi Ceramic Vase", cat: "Living", price: "₹3,800", color: "#d4bfa8", badge: "New", icon: "🏺" },
+    { name: "Linen Throw Blanket", cat: "Bedroom", price: "₹2,400", old: "₹3,200", color: "#c4d4c0", badge: "Sale", icon: "🧺" },
+    { name: "Oak Serving Board", cat: "Kitchen", price: "₹1,900", color: "#d4c4a0", badge: null, icon: "🪵" },
+    { name: "Terracotta Planter", cat: "Garden", price: "₹1,200", color: "#d4a888", badge: "New", icon: "🌿" },
+    { name: "Handwoven Cushion", cat: "Living", price: "₹1,600", old: "₹2,100", color: "#c8c4d8", badge: "Sale", icon: "🛋️" },
+    { name: "Brass Table Lamp", cat: "Lighting", price: "₹5,400", color: "#d4c8a0", badge: null, icon: "💡" },
+    { name: "Cotton Tote Bag", cat: "Apparel", price: "₹890", color: "#c4d0d4", badge: "New", icon: "👜" },
+    { name: "Mango Wood Bowl Set", cat: "Kitchen", price: "₹2,200", color: "#c8b898", badge: null, icon: "🥣" },
+  ];
+
+  const grid = document.getElementById('product-grid');
+
+  products.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <div class="product-img" style="background:${p.color}">
+        <div style="font-size:4rem;opacity:0.5">${p.icon}</div>
+        ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+      </div>
+      <div class="product-info">
+        <p class="product-category">${p.cat}</p>
+        <h3 class="product-name">${p.name}</h3>
+        <div class="product-footer">
+          <div class="product-price">
+            ${p.old ? `<span class="old">${p.old}</span>` : ''}${p.price}
+          </div>
+          <button class="add-btn" title="Add to bag" onclick="addToCart('${p.name}')">+</button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  // Toast
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.innerHTML = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  let cartCount = 0;
+  function addToCart(name) {
+    cartCount++;
+    document.querySelector('.cart-btn').textContent = `Bag (${cartCount})`;
+    showToast(`<span>✓</span> Added: ${name}`);
+  }
+</script>
+</body>
+</html>
